@@ -2,6 +2,8 @@ import re
 import os
 
 
+# Settings file maker for MAX10 TRANSCEIVERS
+
 def file_maker():
     filename_of_created_file = 'Final_radio_config'  # задание имя создаваемого файла
     path = './radio_settings'
@@ -40,7 +42,7 @@ def file_maker():
 
     final_file.write("uint8_t* config_array[]= {\n")
     for line in full_config_array:
-        final_file.write('\t\t\t\t'+line + ', \n')
+        final_file.write('\t\t\t\t' + line + ', \n')
     final_file.write('0x0 \n')
     final_file.write('}\n')
 
