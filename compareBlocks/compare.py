@@ -1,6 +1,5 @@
 import binascii
-import codecs
-import io
+
 
 # сравнивает исходные данные с полученными
 # sourcebuffer - list  с исходными данными
@@ -20,12 +19,19 @@ import io
 #     return
 
 # проверяет наличие исходного пакета в заданном файле
-# def comparator(source, radio_buffer):
-def comparator(source):
-    with open(source, "r") as source_file:
+# source file - путь до файла источника
+# radio_buffer - массив со считанными пакетами
+def comparator(source_file, radio_buffer):
+    with open(source_file, "rb") as source_file:
         source_data = source_file.read()
-
-    write_to_file(source_data, "FUCCCCCCK")
+        clear_source_data = str(binascii.hexlify(source_data))
+    correct_packet_count = 0
+    for i in radio_buffer:
+        if clear_source_data.__contains__(i):
+            correct_packet_count += 1
+        # else:
+        #     print(i)
+    print("Receive packet count : " + str(correct_packet_count))
     return True
 
 
@@ -81,7 +87,7 @@ def read_hex_file_and_parse_packet(filename):
                 num_data_len = int(binascii.hexlify(read_data_length), 16)
             content = f.read(num_data_len)  # чтение ПОЛЕЗНОЙ нагрузки
             trash = f.read(512 - num_data_len)
-            print("data length: =" + str(num_data_len))
+            # print("data length: =" + str(num_data_len))
             if content == b'':
                 break
             splitted_cont = str(binascii.hexlify(content)).split("'")
@@ -105,9 +111,9 @@ def write_to_file(something_data, filename):
 
 
 def start():
-    # buffer_data = read_hex_file_and_parse_packet("source_file/d3.bin")
-    # write_to_file(buffer_data, "clear_d3")
-    comparator("source_file/source.bin")
+    buffer_data = read_hex_file_and_parse_packet("source_file/d3.bin")
+    write_to_file(buffer_data, "clear_d3")
+    comparator("source_file/source.bin", buffer_data)
 
     return
 
