@@ -33,7 +33,6 @@ if z1serial.isOpen():
             # if count > 8:
             if count > 8:
                 break
-
 else:
     print('z1serial not open')
 
