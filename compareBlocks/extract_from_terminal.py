@@ -13,6 +13,7 @@ def write_request_to_terminal(com_name, speed, request):
     ser = serial.Serial(str(com_name), speed, timeout=1)
     print(ser.name)
     ser.write(request)  # тестовая посылка в терминал
+    ser.close()
     return
 
 
@@ -53,10 +54,10 @@ def generate_request_body(command, set_addr):
         arr_request.append(3)
     elif command == "4":
         arr_request.append(4)
-        arr_request.append(set_addr)
+        arr_request.append(int(set_addr))
     elif command == "5":
         arr_request.append(5)
-        arr_request.append(set_addr)
+        arr_request.append(int(set_addr))
     elif command == "6":
         arr_request.append(6)
     elif command == "7":
@@ -73,13 +74,13 @@ def generate_request_body(command, set_addr):
 # read_data_from_terminal("COM3", 57600)
 def menu():
     print(30 * "-", "MENU", 30 * "-")
-    print("1. Program reset 1")
-    print("2. Set r/w address to start 2")
-    print("3. Set read address to start 3")
-    print("4. Set control point 4")
-    print("5. Select address 5")
-    print("6. Requests descriptors 6")
-    print("7. Requests address and status 7")
+    print("1. Program reset ")
+    print("2. Set r/w address to start ")
+    print("3. Set read address to start ")
+    print("4. Set control point ")
+    print("5. Select address ")
+    print("6. Requests descriptors ")
+    print("7. Requests address and status ")
     print("8. Exit")
     print(67 * "-")
 
@@ -88,30 +89,31 @@ def start():
     loop = True
     while loop:
         menu()
-        choice = input("Enter your choice [1-5]: ")
-        if choice == "1":
+        choice = input("Enter your choice [1-8]: ")
+        if "1" == choice:
             write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
         elif choice == "2":
-
-            print("2")
+            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
         elif choice == "3":
-            print("3")
+            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
         elif choice == "4":
-            control_point = input("Control point addr")
-
-            print("4")
+            #TODO адрес пока десятичный
+            control_point = input("Control point addr: ")
+            write_request_to_terminal('COM3', 256000, generate_request_body(choice, control_point))
         elif choice == "5":
-            print("5")
+            sel_addr = input("Select address: ")
+            write_request_to_terminal('COM3', 256000, generate_request_body(choice, sel_addr))
         elif choice == "6":
-            print("6")
+            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
         elif choice == "7":
-            print("7")
+            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
             # loop = False  # This will make the while loop to end as not value of loop is set to False
         elif choice == "8":
             loop = False
         else:
             # Any integer inputs other than values 1-5 we print an error message
             input("Wrong option selection. Enter any key to try again..")
+
 
 start()
 # request_command_and_send("COM6", 256000)
