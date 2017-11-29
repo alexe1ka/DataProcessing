@@ -1,5 +1,6 @@
 import serial
 import binascii
+import time
 
 ser = serial.Serial
 
@@ -21,13 +22,18 @@ def read_packet_from_serial(port_name, port_baudrate):
     # port_baudrate = 256000
     # port_name = 'COM6'  # set the correct port before run it
     z1serial = serial.Serial(port=port_name, baudrate=port_baudrate)
-    z1serial.timeout = 0  # set read timeout
+    z1serial.timeout = 100  # set read timeout
     print(z1serial.isOpen())  # True если порт открыт
     packet = []
     count = 0
+    start_time = time.clock()
+    print(start_time)
     if z1serial.isOpen():
         while True:
             size = z1serial.inWaiting()  # сколько в порту есть - столько и читаем
+            if time.clock() - start_time > 0.2:
+                print(time.clock())
+                break
             if size:
                 data = z1serial.read(size)
                 data_decode = binascii.hexlify(data)  # преобразуем к нормальному виду
@@ -63,7 +69,7 @@ def generate_request_body(command, set_addr):
     elif command == "7":
         arr_request.append(7)
 
-    for i in range(62):
+    for i in range(63):
         arr_request.append(0)
     # request = ''.join(arr_request)
     print(arr_request)
@@ -87,31 +93,33 @@ def menu():
 
 def start():
     loop = True
+    port_number= input("Insert port name: ")
+    port_name = 'COM'+port_number
     while loop:
         menu()
         choice = input("Enter your choice [1-8]: ")
         if "1" == choice:
-            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
+            write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
         elif choice == "2":
-            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
+            write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
         elif choice == "3":
-            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
+            write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
         elif choice == "4":
-            #TODO адрес пока десятичный
+            # TODO адрес пока десятичный
             control_point = input("Control point addr: ")
-            write_request_to_terminal('COM3', 256000, generate_request_body(choice, control_point))
+            write_request_to_terminal(port_name, 256000, generate_request_body(choice, control_point))
         elif choice == "5":
             sel_addr = input("Select address: ")
-            write_request_to_terminal('COM3', 256000, generate_request_body(choice, sel_addr))
+            write_request_to_terminal(port_name, 256000, generate_request_body(choice, sel_addr))
         elif choice == "6":
-            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
+            write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
+            read_packet_from_serial(port_name, 256000)
         elif choice == "7":
-            write_request_to_terminal('COM3', 256000, generate_request_body(choice, 0))
-            # loop = False  # This will make the while loop to end as not value of loop is set to False
+            write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
         elif choice == "8":
             loop = False
         else:
-            # Any integer inputs other than values 1-5 we print an error message
+
             input("Wrong option selection. Enter any key to try again..")
 
 
