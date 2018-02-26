@@ -107,14 +107,15 @@ def menu():
 
 
 def start():
-    while 1:
+    app_start = True
+    while app_start:
         loop = True
         port_number = input("Insert port name: ")
         port_name = 'COM' + port_number
 
         # print(is_correct_serial_port(port_name))
         if is_correct_serial_port(port_name):
-            print("all ok")
+            # print("all ok")
             while loop:
                 menu()
                 choice = input("Enter your choice [1-8]: ")
@@ -139,6 +140,7 @@ def start():
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
                 elif choice == "8":
                     loop = False
+                    app_start = False
                 else:
                     input("Wrong option selection. Enter any key to try again..")
         else:
