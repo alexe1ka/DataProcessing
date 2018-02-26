@@ -29,8 +29,8 @@ def comparator(source_file, radio_buffer):
     for i in radio_buffer:
         if clear_source_data.__contains__(i):
             correct_packet_count += 1
-        # else:
-        #     print(i)
+            # else:
+            #     print(i)
     print("Receive packet count : " + str(correct_packet_count))
     return True
 
@@ -118,4 +118,5 @@ def start():
     return
 
 
-start()  # точка запуска
+if __name__ == "__main__":
+    start()  # точка запуска

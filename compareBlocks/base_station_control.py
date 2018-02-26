@@ -2,15 +2,17 @@ import serial
 import binascii
 import time
 
+
 # pyinstaller --onefile base_station_control.py
-ser = serial.Serial
+# ser = serial.Serial
 
 
 # функция для чтения данных с порта
 # параметры
 # com_name - имя порта('COM1',"COM2"6,etc...)
 # speed - скорость соединения
-def write_request_to_terminal(com_name, speed, request):
+
+def write_request_to_terminal(com_name, speed, request, isSetDtr):
     global ser
     try:
         ser = serial.Serial(str(com_name), speed, timeout=1)
@@ -38,7 +40,7 @@ def read_packet_from_serial(port_name, port_baudrate):
     # port_name = 'COM6'  # set the correct port before run it
     bs_serial_port = serial.Serial(port=port_name, baudrate=port_baudrate)
     bs_serial_port.timeout = 100  # set read timeout
-    print(bs_serial_port.isOpen())  # True если порт открыт
+    # print(bs_serial_port.isOpen())  # True если порт открыт
     packet = []
     count = 0
     start_time = time.clock()
@@ -84,6 +86,9 @@ def generate_request_body(command, set_addr):
     elif command == "7":
         arr_request.append(7)
 
+    elif command == "8":
+        arr_request.append(8)
+
     for i in range(63):
         arr_request.append(0)
     # request = ''.join(arr_request)
@@ -95,14 +100,17 @@ def generate_request_body(command, set_addr):
 # read_data_from_terminal("COM3", 57600)
 def menu():
     print(30 * "-", "MENU", 30 * "-")
-    print("1. Program reset ")
-    print("2. Set r/w address to start ")
-    print("3. Set read address to start ")
-    print("4. Set control point ")
-    print("5. Select address ")
-    print("6. Requests descriptors ")
-    print("7. Requests address and status ")
-    print("8. Exit")
+    print("1. Program reset (MRDI)")
+    print("2. Set r/w address to start (MRDI)")
+    print("3. Set read address to start (MRDI)")
+    print("4. Set control point (MRDI)")
+    print("5. Select address (MRDI)")
+    print("6. Requests descriptors (MRDI)")
+    print("7. Requests address and status (MRDI)")
+    print("8. Data request (BMO)")
+    print("9. Read flash (BMO)")
+    print("10. Write flash (BMO)")
+    print("11. Exit")
     print(67 * "-")
 
 
@@ -139,6 +147,15 @@ def start():
                 elif choice == "7":
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
                 elif choice == "8":
+                    # TODO Data request
+                    pass
+                elif choice == "9":
+                    # TODO Data request
+                    pass
+                elif choice == "10":
+                    # TODO Data request
+                    pass
+                elif choice == "11":
                     loop = False
                     app_start = False
                 else:
@@ -148,5 +165,5 @@ def start():
             continue
 
 
-start()
-# request_command_and_send("COM6", 256000)
+if __name__ == "__main__":
+    start()
