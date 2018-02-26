@@ -127,33 +127,32 @@ def start():
             while loop:
                 menu()
                 choice = input("Enter your choice [1-8]: ")
-
                 if "1" == choice:
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
-                elif choice == "2":
+                elif "2" == choice:
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
-                elif choice == "3":
+                elif "3" == choice:
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
-                elif choice == "4":
+                elif "4" == choice:
                     # TODO адрес пока десятичный
                     control_point = input("Control point addr: ")
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, control_point))
-                elif choice == "5":
+                elif "5" == choice:
                     sel_addr = input("Select address: ")
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, sel_addr))
-                elif choice == "6":
+                elif "6" == choice:
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
                     read_packet_from_serial(port_name, 256000)
-                elif choice == "7":
+                elif "7" == choice:
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
-                elif choice == "8":
+                elif "8" == choice:
                     # TODO Data request
                     pass
-                elif choice == "9":
-                    # TODO Data request
+                elif "9" == choice:
+                    # TODO Read flash
                     pass
-                elif choice == "10":
-                    # TODO Data request
+                elif "10" == choice:
+                    # TODO Write flash
                     pass
                 elif choice == "11":
                     loop = False

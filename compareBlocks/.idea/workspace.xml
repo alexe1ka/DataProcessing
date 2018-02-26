@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30133849-0374-4370-b2a0-250554c7e9cd" name="Default" comment="новые пункты">
+    <list default="true" id="30133849-0374-4370-b2a0-250554c7e9cd" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/base_station_control.py" afterPath="$PROJECT_DIR$/base_station_control.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/compare.py" afterPath="$PROJECT_DIR$/compare.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/extractor.py" afterPath="$PROJECT_DIR$/extractor.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,8 +24,8 @@
       <file leaf-file-name="base_station_control.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/base_station_control.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="102" column="33" lean-forward="false" selection-start-line="102" selection-start-column="33" selection-end-line="102" selection-end-column="33" />
+            <state relative-caret-position="466">
+              <caret line="154" column="27" lean-forward="false" selection-start-line="154" selection-start-column="27" selection-end-line="154" selection-end-column="27" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -364,7 +362,14 @@
       <option name="project" value="LOCAL" />
       <updated>1519645523940</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="новые пункты меню">
+      <created>1519650984540</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1519650984540</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -424,7 +429,8 @@
     <MESSAGE value="небольшие исправления" />
     <MESSAGE value="добавлена обработка ошибки при неправильном номере ком порта.сделать еще корректную обработку ошибки &quot;Cannot configure this port&quot; - если она есть,вызывать запрос номера другого порта" />
     <MESSAGE value="правильный выход из проги" />
-    <option name="LAST_COMMIT_MESSAGE" value="правильный выход из проги" />
+    <MESSAGE value="новые пункты меню" />
+    <option name="LAST_COMMIT_MESSAGE" value="новые пункты меню" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -815,8 +821,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/base_station_control.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="102" column="33" lean-forward="false" selection-start-line="102" selection-start-column="33" selection-end-line="102" selection-end-column="33" />
+        <state relative-caret-position="466">
+          <caret line="154" column="27" lean-forward="false" selection-start-line="154" selection-start-column="27" selection-end-line="154" selection-end-column="27" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
