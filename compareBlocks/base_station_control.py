@@ -2,6 +2,7 @@ import serial
 import binascii
 import time
 
+# pyinstaller --onefile base_station_control.py
 ser = serial.Serial
 
 
@@ -12,7 +13,7 @@ ser = serial.Serial
 def write_request_to_terminal(com_name, speed, request):
     global ser
     ser = serial.Serial(str(com_name), speed, timeout=1)
-    print(ser.name)
+    # print(ser.name)
     ser.write(request)  # тестовая посылка в терминал
     ser.close()
     return
@@ -27,12 +28,12 @@ def read_packet_from_serial(port_name, port_baudrate):
     packet = []
     count = 0
     start_time = time.clock()
-    print(start_time)
+    # print(start_time)
     if z1serial.isOpen():
         while True:
             size = z1serial.inWaiting()  # сколько в порту есть - столько и читаем
             if time.clock() - start_time > 0.2:
-                print(time.clock())
+                # print(time.clock())
                 break
             if size:
                 data = z1serial.read(size)
@@ -72,7 +73,7 @@ def generate_request_body(command, set_addr):
     for i in range(63):
         arr_request.append(0)
     # request = ''.join(arr_request)
-    print(arr_request)
+    # print(arr_request)
     print("size of packet : " + str(len(arr_request)))
     return arr_request
 
@@ -93,8 +94,8 @@ def menu():
 
 def start():
     loop = True
-    port_number= input("Insert port name: ")
-    port_name = 'COM'+port_number
+    port_number = input("Insert port name: ")
+    port_name = 'COM' + port_number
     while loop:
         menu()
         choice = input("Enter your choice [1-8]: ")
@@ -119,7 +120,6 @@ def start():
         elif choice == "8":
             loop = False
         else:
-
             input("Wrong option selection. Enter any key to try again..")
 
 
