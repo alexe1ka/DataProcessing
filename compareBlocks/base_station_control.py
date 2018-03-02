@@ -12,8 +12,8 @@ import time
 # com_name - имя порта('COM1',"COM2"6,etc...)
 # speed - скорость соединения
 
-def write_request_to_terminal(com_name, speed, request, isSetDtr):
-    global ser
+def write_request_to_terminal(com_name, speed, request):
+    # global ser
     try:
         ser = serial.Serial(str(com_name), speed, timeout=1)
         # print(ser.name)
@@ -62,7 +62,7 @@ def read_packet_from_serial(port_name, port_baudrate):
                 if count > 8:
                     break
     else:
-        print('z1serial not open')
+        print('serial not open')
     bs_serial_port.close()
 
 
@@ -126,7 +126,7 @@ def start():
             # print("all ok")
             while loop:
                 menu()
-                choice = input("Enter your choice [1-8]: ")
+                choice = input("Enter your choice [1-11]: ")
                 if "1" == choice:
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
                 elif "2" == choice:
@@ -135,8 +135,11 @@ def start():
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, 0))
                 elif "4" == choice:
                     # TODO адрес пока десятичный
-                    control_point = input("Control point addr: ")
-                    write_request_to_terminal(port_name, 256000, generate_request_body(choice, control_point))
+                    try:
+                        control_point = input("Control point addr: ")
+                        write_request_to_terminal(port_name, 256000, generate_request_body(choice, control_point))
+                    except ValueError:
+                        print("Only decimal number must be input")
                 elif "5" == choice:
                     sel_addr = input("Select address: ")
                     write_request_to_terminal(port_name, 256000, generate_request_body(choice, sel_addr))
